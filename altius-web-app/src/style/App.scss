@@ -1,0 +1,161 @@
+
+@mixin scrollbar($width: 6px, $trackBorderRadius: 10px, $thumbBorderRadius: 10px, $marginLeft: 0, $marginRight: 0) {
+    overflow: auto;
+    
+	&::-webkit-scrollbar {
+	    width: $width + $marginLeft + $marginRight + 6px;
+	    height: $width + 6px;
+	    cursor: default;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: $trackBorderRadius;
+		border-left: $marginLeft solid transparent;
+		border-right: $marginRight solid transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #e7e7e7ed;
+				box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #e7e7e7ed;
+		border-radius: $thumbBorderRadius;
+		border: 3px solid transparent;
+
+		&:hover {
+			-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #bdbdbded;
+					box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #bdbdbded;
+		}
+
+		&:active {
+			-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #9f9f9fed;
+					box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4), inset 10000px 0 0 #9f9f9fed;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+
+    div.App {
+        .modal-overlay > .modal-view {
+            flex-grow: 1;
+            border-radius: 0;
+        }
+
+        > .login-view { button { flex-grow: 1; } }
+    }
+}
+
+.App {
+
+    @keyframes shimmer { 100% {-webkit-mask-position:left} }
+
+    .shimmer {
+        -webkit-mask:linear-gradient(-60deg,#000 30%,#0005,#000 70%) right/300% 100%;
+        background-repeat: no-repeat;
+        animation: shimmer 1.8s infinite;
+    }
+
+    > div.message-banner-view {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        background-color: #f0665c;
+        color: white;
+        z-index: 1001;
+    }
+
+    .scrollbar {
+        overflow-y: auto;
+        @include scrollbar; 
+    }
+
+    > .login-view {
+        gap: 15px;
+        align-self: center;
+    
+        > .textbox {width: 200px; }
+        button { max-width: 200px;}
+    }
+    
+    .main-view {
+        gap: 10px;
+        align-items: center;
+
+        .websites-list {
+           
+            .demo {
+                width: 200px;
+                height: 25px;
+                border-radius: 6px;
+                background-color: #e6e2e2;
+            }
+        }
+
+        .website-info {
+            overflow: auto;
+            width: 600px;
+            height: 500px;
+            gap: 10px;
+
+            > div {
+                flex-grow: 1;
+                padding: 0 10px;
+                
+                .textarea {
+                    width: 100%;
+                    height: 100%;
+                    resize: none;
+                }
+            }
+        }
+    
+        input {
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+    
+            &[type=number] { -moz-appearance: textfield; }
+        }
+    }
+}
+
+
+.App .modal-overlay {
+    background-color: #bebebe6b;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    > .modal-view {
+        position: relative;
+        gap: 10px;
+        width: fit-content;
+        background-color: white;
+        min-height: 100px;
+        min-width: 100px;
+        box-shadow: 0px -2px 12px rgba(5, 61, 61, 0.15), 0px 2px 12px rgba(5, 61, 61, 0.15);
+        border-radius: 8px;
+        box-sizing: border-box;
+        padding: 20px;
+
+        > .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        > .header { font-weight: 600; }
+    }
+}
+
+

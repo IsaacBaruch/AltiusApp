@@ -1,0 +1,34 @@
+
+.textbox {
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #dae5decc
+}
+
+button.button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    padding: 0.85em 1.5em;
+    background-color: #F5FFFB;
+    transition: all 0.2s;
+    color: #8A998E;
+    white-space: nowrap;
+    cursor: pointer;
+
+    > svg { fill: #ff6666; }
+
+    &.default,
+    &:hover:not([disabled]):not(:active) {
+        background-color: #009998;
+        color: white;
+
+        > svg { fill: white; }
+    }
+
+    &[disabled] { filter: grayscale(1); }
+}
